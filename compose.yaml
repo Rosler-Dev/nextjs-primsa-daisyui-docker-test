@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+    image: nextjs-dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://postgres:Juniper45!@db:5432/dev-db
+      BASE_URL: http://localhost:3000
+      NEXT_PUBLIC_API_URL: http://localhost:3000/api
+    depends_on:
+      - db
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Juniper45!
+    ports:
+      - '5432:5432'
